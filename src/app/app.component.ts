@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Sushi-Calculator';
+
+  totalPrice = 0;
+  currency = "JPY";
+
+  updatePrice(price: number) {
+    this.totalPrice = price;
+  }
 }

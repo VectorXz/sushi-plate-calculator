@@ -1,0 +1,21 @@
+<div
+  class="card w-96 bg-primary text-primary-content hover:cursor-pointer hover:scale-105 active:scale-90 transition ease-in-out duration-300 border-dashed border-2 border-slate-900"
+  [ngStyle]="{ backgroundColor: bgColor }"
+  (click)="addPrice(price)"
+>
+  <div class="card-body">
+    <h2 class="card-title badge p-3">{{ price }} {{ currency }}</h2>
+    <div class="card-actions justify-end">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        class="bi bi-plus w-24 h-24"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
