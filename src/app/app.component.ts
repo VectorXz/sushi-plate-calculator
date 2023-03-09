@@ -9,9 +9,11 @@ export class AppComponent {
   title = 'Sushi-Calculator';
 
   totalPrice = 0;
-  currency = "JPY";
+  totalPlate = 0;
+  currency = "THB";
 
-  updatePrice(price: number) {
-    this.totalPrice = price;
+  handleAddPlate(price: number): void {
+    this.totalPrice += price;
+    this.totalPlate += 1;
   }
 }

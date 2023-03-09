@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card-button',
@@ -11,4 +11,9 @@ export class CardButtonComponent {
   @Input() bgColor: string = "#ffffff";
   @Input() addPrice: Function;
   @Input() currency: string;
+  @Output() onButtonClick = new EventEmitter<number>();
+
+  handleButtonClick = (price: string) => {
+    this.onButtonClick.emit(Number(price));
+  }
 }

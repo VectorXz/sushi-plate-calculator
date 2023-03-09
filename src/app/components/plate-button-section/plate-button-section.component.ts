@@ -9,11 +9,9 @@ export class PlateButtonSectionComponent {
 
   @Input() currency: string = "THB";
   totalPrice: number = 0;
+  @Output() onAddPlate = new EventEmitter<number>();
 
-  @Output() onPriceChange = new EventEmitter<number>();
-
-  addPrice = (price: number): void => {
-    this.totalPrice += Number(price);
-    this.onPriceChange.emit(this.totalPrice);
+  handleButtonClick = (price: number) => {
+    this.onAddPlate.emit(price);
   }
 }

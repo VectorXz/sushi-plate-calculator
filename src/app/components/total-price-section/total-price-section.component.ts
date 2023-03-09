@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class TotalPriceSectionComponent {
   @Input() totalPrice: number = 0;
+  @Input() totalPlate: number = 0;
   @Input() currency: string = "THB";
 }
