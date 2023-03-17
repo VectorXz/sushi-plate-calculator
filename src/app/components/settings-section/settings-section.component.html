@@ -1,121 +1,119 @@
-<div>
-  <!-- The button to open modal -->
+<div class="flex flex-row">
   <label for="settings-modal" class="btn btn-xs btn-accent">Settings</label>
+  <button class="btn btn-xs ml-10" id="serviceChargeBtn" [class.toggled]="isIncludeServiceCharge" (click)="toggleServiceCharge()">{{ isIncludeServiceCharge ? "-" : "+"}} Service Charge</button>
+  <button class="btn btn-xs ml-2" id="vatBtn" [class.toggled]="isIncludeVat" (click)="toggleVat()">{{ isIncludeVat ? "-" : "+"}} VAT</button>
+</div>
 
-  <!-- Put this part before </body> tag -->
-  <input type="checkbox" id="settings-modal" class="modal-toggle" />
-  <div class="modal">
-    <div
-      class="modal-box relative"
-      style="overflow: initial; overflow-y: scroll"
-    >
-      <div class="flex flex-row justify-between align-middle items-center mb-3">
-        <h3 class="text-2xl font-bold text-primary">Settings</h3>
-        <span
-          class="text-sm text-red-600 font-extrabold underline decoration-solid hover:cursor-pointer"
-          (click)="resetSettings()"
-          >RESET SETTINGS</span
-        >
-      </div>
-      <div class="flex flex-row">
-        <div><span class="font-bold">Currency</span></div>
-        <div class="dropdown dropdown-bottom">
-          <label tabindex="0" class="btn btn-xs btn-secondary mx-1">{{
-            currency
-          }}</label>
-          <ul
-            tabindex="0"
-            class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-            #currencyList
-          >
-            <li
-              *ngFor="let elem of allCurrency"
-              (click)="changeCurrency(elem)"
-              [class.active]="elem === currency"
-            >
-              <a>{{ elem }}</a>
-            </li>
-          </ul>
-        </div>
-        <div>(* click to change)</div>
-      </div>
-      <div class="flex flex-row gap-2 mt-2">
-        <div class="flex flex-1 justify-center">
-          <h4 class="text-lg font-bold">Price</h4>
-        </div>
-        <div class="flex flex-1 justify-center">
-          <h4 class="text-lg font-bold">Color</h4>
-        </div>
-        <div class="flex"></div>
-      </div>
-      <div
-        class="flex flex-row gap-2 my-2"
-        *ngFor="let data of priceData; index as i"
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="settings-modal" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box relative" style="overflow: initial; overflow-y: scroll">
+    <div class="flex flex-row justify-between align-middle items-center mb-3">
+      <h3 class="text-2xl font-bold text-primary">Settings</h3>
+      <span
+        class="text-sm text-red-600 font-extrabold underline decoration-solid hover:cursor-pointer"
+        (click)="resetSettings()"
+        >RESET SETTINGS</span
       >
-        <div class="flex flex-1">
-          <input
-            type="text"
-            placeholder="Price"
-            class="input input-bordered w-full max-w-xs"
-            [(ngModel)]="data.price"
-          />
-        </div>
-        <div class="flex flex-1">
-          <input
-            type="text"
-            placeholder="Color in hex"
-            class="input input-bordered w-3/4 max-w-xs"
-            [(ngModel)]="data.color"
-          />
-          <app-select-color-button
-            [selectedColor]="data.color"
-            (onChangeColor)="handleOnChangecolor($event, i)"
-          ></app-select-color-button>
-        </div>
-        <div class="flex items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="16"
-            width="16"
-            viewBox="0 0 48 48"
-            class="hover:cursor-pointer"
-            (click)="deletePriceData(i)"
+    </div>
+    <div class="flex flex-row">
+      <div><span class="font-bold">Currency</span></div>
+      <div class="dropdown dropdown-bottom">
+        <label tabindex="0" class="btn btn-xs btn-secondary mx-1">{{
+          currency
+        }}</label>
+        <ul
+          tabindex="0"
+          class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+          #currencyList
+        >
+          <li
+            *ngFor="let elem of allCurrency"
+            (click)="changeCurrency(elem)"
+            [class.active]="elem === currency"
           >
-            <path
-              d="m12.45 38.85-3.3-3.3L20.7 24 9.15 12.45l3.3-3.3L24 20.7 35.55 9.15l3.3 3.3L27.3 24l11.55 11.55-3.3 3.3L24 27.3Z"
-            />
-          </svg>
-        </div>
+            <a>{{ elem }}</a>
+          </li>
+        </ul>
       </div>
-      <div class="flex flex-row gap-2">
-        <div
-          class="flex flex-1 justify-center rounded-lg bg-indigo-200 border-2 border-primary py-2 hover:cursor-pointer"
-          (click)="addPrice()"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="32"
-            width="32"
-            viewBox="0 0 48 48"
-            class="fill-primary"
-          >
-            <path
-              d="M22.35 34.3h3.6V26h8.35v-3.6h-8.35v-8.7h-3.6v8.7H13.7V26h8.65ZM24 45.25q-4.4 0-8.275-1.65T8.95 39.05q-2.9-2.9-4.55-6.75T2.75 24q0-4.45 1.65-8.325 1.65-3.875 4.55-6.75t6.75-4.55Q19.55 2.7 24 2.7q4.45 0 8.325 1.675 3.875 1.675 6.75 4.55t4.55 6.75Q45.3 19.55 45.3 24q0 4.45-1.675 8.3-1.675 3.85-4.55 6.725-2.875 2.875-6.75 4.55Q28.45 45.25 24 45.25Zm.05-4.7q6.85 0 11.675-4.825Q40.55 30.9 40.55 23.95q0-6.85-4.825-11.675Q30.9 7.45 24 7.45q-6.9 0-11.725 4.825Q7.45 17.1 7.45 24q0 6.9 4.825 11.725Q17.1 40.55 24.05 40.55ZM24 24Z"
-            />
-          </svg>
-        </div>
+      <div>(* click to change)</div>
+    </div>
+    <div class="flex flex-row gap-2 mt-2">
+      <div class="flex flex-1 justify-center">
+        <h4 class="text-lg font-bold">Price</h4>
       </div>
-      <div class="modal-action">
-        <label
-          for="settings-modal"
-          class="btn btn-primary"
-          (click)="saveSettings()"
-          >Save</label
-        >
-        <label for="settings-modal" class="btn" (click)="resetState()"
-          >Close</label
-        >
+      <div class="flex flex-1 justify-center">
+        <h4 class="text-lg font-bold">Color</h4>
       </div>
+      <div class="flex"></div>
+    </div>
+    <div
+      class="flex flex-row gap-2 my-2"
+      *ngFor="let data of priceData; index as i"
+    >
+      <div class="flex flex-1">
+        <input
+          type="text"
+          placeholder="Price"
+          class="input input-bordered w-full max-w-xs"
+          [(ngModel)]="data.price"
+        />
+      </div>
+      <div class="flex flex-1">
+        <input
+          type="text"
+          placeholder="Color in hex"
+          class="input input-bordered w-3/4 max-w-xs"
+          [(ngModel)]="data.color"
+        />
+        <app-select-color-button
+          [selectedColor]="data.color"
+          (onChangeColor)="handleOnChangecolor($event, i)"
+        ></app-select-color-button>
+      </div>
+      <div class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="16"
+          viewBox="0 0 48 48"
+          class="hover:cursor-pointer"
+          (click)="deletePriceData(i)"
+        >
+          <path
+            d="m12.45 38.85-3.3-3.3L20.7 24 9.15 12.45l3.3-3.3L24 20.7 35.55 9.15l3.3 3.3L27.3 24l11.55 11.55-3.3 3.3L24 27.3Z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div class="flex flex-row gap-2">
+      <div
+        class="flex flex-1 justify-center rounded-lg bg-indigo-200 border-2 border-primary py-2 hover:cursor-pointer"
+        (click)="addPrice()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="32"
+          width="32"
+          viewBox="0 0 48 48"
+          class="fill-primary"
+        >
+          <path
+            d="M22.35 34.3h3.6V26h8.35v-3.6h-8.35v-8.7h-3.6v8.7H13.7V26h8.65ZM24 45.25q-4.4 0-8.275-1.65T8.95 39.05q-2.9-2.9-4.55-6.75T2.75 24q0-4.45 1.65-8.325 1.65-3.875 4.55-6.75t6.75-4.55Q19.55 2.7 24 2.7q4.45 0 8.325 1.675 3.875 1.675 6.75 4.55t4.55 6.75Q45.3 19.55 45.3 24q0 4.45-1.675 8.3-1.675 3.85-4.55 6.725-2.875 2.875-6.75 4.55Q28.45 45.25 24 45.25Zm.05-4.7q6.85 0 11.675-4.825Q40.55 30.9 40.55 23.95q0-6.85-4.825-11.675Q30.9 7.45 24 7.45q-6.9 0-11.725 4.825Q7.45 17.1 7.45 24q0 6.9 4.825 11.725Q17.1 40.55 24.05 40.55ZM24 24Z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div class="modal-action">
+      <label
+        for="settings-modal"
+        class="btn btn-primary"
+        (click)="saveSettings()"
+        >Save</label
+      >
+      <label for="settings-modal" class="btn" (click)="resetState()"
+        >Close</label
+      >
     </div>
   </div>
 </div>

@@ -8,3 +8,8 @@ ul.menu > li.active {
     background-color: rgb(243 244 246);
     font-weight: bold;
 }
+
+
+#serviceChargeBtn.toggled, #vatBtn.toggled {
+    background-color: #F000B8;
+}

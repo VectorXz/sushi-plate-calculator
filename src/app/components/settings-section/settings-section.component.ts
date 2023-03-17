@@ -21,6 +21,8 @@ export class SettingsSectionComponent implements OnInit {
     "USD",
   ]
 
+  @Input() isIncludeServiceCharge: boolean;
+  @Input() isIncludeVat: boolean;
   private _currency: string;
   @Input() set currency(data: string) {
     if(data) {
@@ -35,6 +37,8 @@ export class SettingsSectionComponent implements OnInit {
   private _originalPriceData: PriceData[];
   @Output() onPriceDataChange = new EventEmitter<PriceData[]>();
   @Output() onCurrencyChange = new EventEmitter<string>();
+  @Output() onToggleServiceCharge = new EventEmitter();
+  @Output() onToggleVat = new EventEmitter();
   @ViewChild('currencyList') currencyList: ElementRef;
 
   color: string = "#ff0000";
@@ -142,5 +146,13 @@ export class SettingsSectionComponent implements OnInit {
   changeCurrency(currency: string) {
     this.currencyList.nativeElement.blur();
     this.currency = currency;
+  }
+
+  toggleServiceCharge() {
+    this.onToggleServiceCharge.emit();
+  }
+
+  toggleVat() {
+    this.onToggleVat.emit();
   }
 }

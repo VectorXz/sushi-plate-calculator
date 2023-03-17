@@ -13,8 +13,8 @@ export class AppComponent {
   priceData: PriceData[] = [];
   plateLogData: PlateLog[] = [];
 
-  totalPrice = 0;
-  totalPlate = 0;
+  isIncludeServiceCharge = false;
+  isIncludeVat = false;
 
   constructor() {
     this.priceData = [
@@ -101,6 +101,14 @@ export class AppComponent {
       return data;
     })
     this.plateLogData = updatedData
+  }
+
+  handleToggleServiceCharge() {
+    this.isIncludeServiceCharge = !this.isIncludeServiceCharge
+  }
+
+  handleToggleVat() {
+    this.isIncludeVat = !this.isIncludeVat
   }
 
 }

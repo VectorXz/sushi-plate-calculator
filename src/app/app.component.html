@@ -5,15 +5,19 @@
     [currency]="currency"
     (onPriceDataChange)="handlePriceDataChange($event)"
     (onCurrencyChange)="handleOnCurrencyChange($event)"
+    (onToggleServiceCharge)="handleToggleServiceCharge()"
+    (onToggleVat)="handleToggleVat()"
+    [isIncludeServiceCharge]="isIncludeServiceCharge"
+    [isIncludeVat]="isIncludeVat"
   ></app-settings-section>
   <app-total-price-section
-    [totalPrice]="totalPrice"
-    [totalPlate]="totalPlate"
     [currency]="currency"
     (onReset)="resetCounter($event)"
     [plateLogData]="plateLogData"
     (onDecreaseAmount)="handleDecreaseAmount($event)"
     (onIncreaseAmount)="handleIncreaseAmount($event)"
+    [isIncludeServiceCharge]="isIncludeServiceCharge"
+    [isIncludeVat]="isIncludeVat"
   ></app-total-price-section>
   <app-plate-button-section
     [priceData]="priceData"

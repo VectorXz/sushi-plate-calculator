@@ -7,8 +7,8 @@ import { PlateLog } from 'src/app/app.interface';
   styleUrls: ['./total-price-section.component.scss']
 })
 export class TotalPriceSectionComponent {
-  @Input() totalPrice: number = 0;
-  @Input() totalPlate: number = 0;
+  @Input() isIncludeServiceCharge: boolean;
+  @Input() isIncludeVat: boolean;
   @Input() currency: string = "THB";
   @Input() plateLogData: PlateLog[];
   @Output() onReset = new EventEmitter();
@@ -28,7 +28,14 @@ export class TotalPriceSectionComponent {
   }
 
   calculateTotalPrice() {
-    return this.plateLogData.reduce((acc, current) => acc + (Number(current.price) * current.amount), 0)
+    let rawSum = this.plateLogData.reduce((acc, current) => acc + (Number(current.price) * current.amount), 0)
+    if(this.isIncludeServiceCharge) {
+      rawSum = rawSum + (rawSum * 0.1)
+    }
+    if(this.isIncludeVat) {
+      rawSum = rawSum + (rawSum * 0.07)
+    }
+    return rawSum;
   }
 
   calculateTotalPlate() {
