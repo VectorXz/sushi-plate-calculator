@@ -5,24 +5,39 @@
   <!-- Put this part before </body> tag -->
   <input type="checkbox" id="settings-modal" class="modal-toggle" />
   <div class="modal">
-    <div class="modal-box relative" style="overflow: initial; overflow-y: scroll;">
+    <div
+      class="modal-box relative"
+      style="overflow: initial; overflow-y: scroll"
+    >
       <div class="flex flex-row justify-between align-middle items-center mb-3">
         <h3 class="text-2xl font-bold text-primary">Settings</h3>
-        <span class="text-sm text-red-600 font-extrabold underline decoration-solid hover:cursor-pointer" (click)="resetSettings()">RESET SETTINGS</span>
+        <span
+          class="text-sm text-red-600 font-extrabold underline decoration-solid hover:cursor-pointer"
+          (click)="resetSettings()"
+          >RESET SETTINGS</span
+        >
       </div>
       <div class="flex flex-row">
         <div><span class="font-bold">Currency</span></div>
         <div class="dropdown dropdown-bottom">
-          <label tabindex="0" class="btn btn-xs btn-secondary mx-1">{{ currency }}</label>
+          <label tabindex="0" class="btn btn-xs btn-secondary mx-1">{{
+            currency
+          }}</label>
           <ul
             tabindex="0"
             class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
             #currencyList
           >
-          <li *ngFor="let elem of allCurrency" (click)="changeCurrency(elem)" [class.active]="elem === currency"><a>{{ elem }}</a></li>
+            <li
+              *ngFor="let elem of allCurrency"
+              (click)="changeCurrency(elem)"
+              [class.active]="elem === currency"
+            >
+              <a>{{ elem }}</a>
+            </li>
           </ul>
-        </div> 
-        <div>(* click to change)</div>       
+        </div>
+        <div>(* click to change)</div>
       </div>
       <div class="flex flex-row gap-2 mt-2">
         <div class="flex flex-1 justify-center">
@@ -33,7 +48,10 @@
         </div>
         <div class="flex"></div>
       </div>
-      <div class="flex flex-row gap-2 my-2" *ngFor="let data of priceData; index as i">
+      <div
+        class="flex flex-row gap-2 my-2"
+        *ngFor="let data of priceData; index as i"
+      >
         <div class="flex flex-1">
           <input
             type="text"
@@ -49,7 +67,10 @@
             class="input input-bordered w-3/4 max-w-xs"
             [(ngModel)]="data.color"
           />
-          <app-select-color-button [selectedColor]="data.color" (onChangeColor)="handleOnChangecolor($event, i)"></app-select-color-button>
+          <app-select-color-button
+            [selectedColor]="data.color"
+            (onChangeColor)="handleOnChangecolor($event, i)"
+          ></app-select-color-button>
         </div>
         <div class="flex items-center">
           <svg
@@ -85,10 +106,15 @@
         </div>
       </div>
       <div class="modal-action">
-        <label for="settings-modal" class="btn btn-primary" (click)="saveSettings()"
+        <label
+          for="settings-modal"
+          class="btn btn-primary"
+          (click)="saveSettings()"
           >Save</label
         >
-        <label for="settings-modal" class="btn" (click)="resetState()">Close</label>
+        <label for="settings-modal" class="btn" (click)="resetState()"
+          >Close</label
+        >
       </div>
     </div>
   </div>

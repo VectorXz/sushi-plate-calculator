@@ -66,6 +66,14 @@ export class SettingsSectionComponent implements OnInit {
     return '#' + hexColor.toUpperCase();
   }
   
+  containsOnlyDigits(input: string) {
+    return /^\d+$/.test(input);
+  }
+  
+  isValidHexColor(input: string) {
+    return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(input);
+  }
+  
 
   deletePriceData(index: number) {
     const newPriceData = JSON.parse(JSON.stringify(this.priceData))
@@ -75,6 +83,16 @@ export class SettingsSectionComponent implements OnInit {
 
   saveSettings() {
     this.priceData = this.priceData.filter(o => !!o.price && !!o.color);
+    const isInvalidPrice = this.priceData.some(o => !this.containsOnlyDigits(o.price))
+    if(isInvalidPrice) {
+      alert('Please input only number for price!')
+    }
+    const isInvalidColorHex = this.priceData.some(o => !this.isValidHexColor(o.color))
+    if(isInvalidColorHex) {
+      alert('Please input a valid hex color!')
+    }
+    this.priceData = this.priceData.filter(o => this.containsOnlyDigits(o.price) && this.isValidHexColor(o.color));
+
     this.onPriceDataChange.emit(this.priceData);
     this.onCurrencyChange.emit(this.currency);
     this._originalCurrency = this.currency;
