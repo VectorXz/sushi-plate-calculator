@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ColorPickerControl } from '@iplab/ngx-color-picker';
-import { PriceData } from 'src/app/app.component';
+import { PriceData } from 'src/app/app.interface';
 
 @Component({
   selector: 'app-settings-section',

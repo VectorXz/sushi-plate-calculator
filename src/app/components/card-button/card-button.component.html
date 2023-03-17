@@ -1,7 +1,7 @@
 <div
   class="card w-full md:w-96 bg-primary text-primary-content hover:cursor-pointer hover:scale-105 active:scale-90 transition ease-in-out border-dashed border-2 border-slate-900"
   [ngStyle]="{ backgroundColor: bgColor }"
-  (click)="handleButtonClick(price)"
+  (click)="handleButtonClick({price, color: bgColor})"
 >
   <div class="card-body">
     <h2 class="card-title badge p-3">{{ price }} {{ currency }}</h2>

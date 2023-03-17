@@ -1,7 +1,7 @@
 <div class="flex flex-col text-center gap-1 my-2">
   <div>
     <h3 class="text-3xl font-bold align-middle inline-block">
-      <button class="btn btn-xs btn-error mr-3" (click)="handleResetCounter()">
+      <button class="btn btn-xs bg-red-500 mr-3 hover:bg-red-700" (click)="handleResetCounter()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -19,12 +19,45 @@
         </svg>
       </button>
       <span class="align-middle inline-block"> Total Price</span>
-      <span class="badge badge-primary align-middle inline-block ml-3"
-        >{{ totalPlate }} plate(s)</span
+      <label
+        for="summary-modal"
+        class="badge badge-primary align-middle inline-block ml-3 hover:cursor-pointer"
+        >{{ calculateTotalPlate() }} plate(s)</label
       >
     </h3>
   </div>
   <div class="flex flex-row justify-center items-center">
-    <h2 class="text-5xl md:text-9xl">{{ totalPrice }} {{ currency }}</h2>
+    <label for="summary-modal" class="text-5xl md:text-9xl hover:cursor-pointer"
+      >{{ calculateTotalPrice() }} {{ currency }}</label
+    >
+  </div>
+</div>
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="summary-modal" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box">
+    <h3 class="text-2xl font-bold text-primary mb-3">Summary Details</h3>
+    <div class="flex flex-row gap-2 my-2 justify-between font-bold text-red-600">
+      <div>Total of {{ calculateTotalPrice() }} {{ currency }}</div>
+      <div>{{ calculateTotalPlate() }} plate(s)</div>
+    </div>
+    <div class="flex flex-row gap-2 my-2 justify-between" *ngFor="let data of plateLogData">
+      <div class="flex flex-row justify-center align-middle items-center">
+        <div
+          class="w-5 h-5 rounded-full"
+          [style.background-color]="data.color"
+        ></div>
+        <span class="font-bold ml-2">{{ data.price }} {{ currency }}</span>
+      </div>
+      <div class="flex flex-row justify-center align-middle items-center">
+        <span class="btn btn-xs rounded-full" (click)="decreaseAmount(data.color)">-</span>
+        <div class="text-lg font-bold mx-2">{{ data.amount }}</div>
+        <span class="btn btn-xs rounded-full" (click)="increaseAmount(data.color)">+</span>
+      </div>
+    </div>
+    <div class="modal-action">
+      <label for="summary-modal" class="btn">Close</label>
+    </div>
   </div>
 </div>

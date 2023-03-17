@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-
-export interface PriceData {
-  price: string;
-  color: string;
-}
+import { PlateLog, PriceAndColor, PriceData } from './app.interface';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +9,12 @@ export interface PriceData {
 export class AppComponent {
   title = 'Sushi-Calculator';
 
-  totalPrice = 0;
-  totalPlate = 0;
   currency = 'THB';
   priceData: PriceData[] = [];
+  plateLogData: PlateLog[] = [];
+
+  totalPrice = 0;
+  totalPlate = 0;
 
   constructor() {
     this.priceData = [
@@ -39,15 +37,33 @@ export class AppComponent {
     ]
   }
 
-  handleAddPlate(price: number): void {
-    this.totalPrice += price;
-    this.totalPlate += 1;
+  handleAddPlate(data: PriceAndColor): void {
+    const currentColorData = this.plateLogData.map(i => i.color);
+    if(currentColorData.includes(data.color)) {
+      //add plate
+      const updatedData = this.plateLogData.map(i => {
+        if(i.color === data.color) {
+          return {
+            ...i,
+            amount: i.amount+1
+          }
+        }
+        return i;
+      })
+      this.plateLogData = updatedData;
+    } else {
+      const temp: PlateLog = {
+        price: data.price,
+        color: data.color,
+        amount: 1
+      }
+      this.plateLogData.push(temp);
+    }
   }
 
   resetCounter(data: boolean) {
     if (data) {
-      this.totalPrice = 0;
-      this.totalPlate = 0;
+      this.plateLogData = [];
     }
   }
 
@@ -57,6 +73,34 @@ export class AppComponent {
 
   handleOnCurrencyChange(currency: string) {
     this.currency = currency;
+  }
+
+  handleDecreaseAmount(color: string) {
+    const updatedData = this.plateLogData.map((data) => {
+      if(data.color === color) {
+        return {
+          ...data,
+          amount: data.amount-1
+        }
+      }
+      return data;
+    })
+    .filter((data) => data.amount > 0)
+    
+    this.plateLogData = updatedData
+  }
+
+  handleIncreaseAmount(color: string) {
+    const updatedData = this.plateLogData.map((data) => {
+      if(data.color === color) {
+        return {
+          ...data,
+          amount: data.amount+1
+        }
+      }
+      return data;
+    })
+    this.plateLogData = updatedData
   }
 
 }
