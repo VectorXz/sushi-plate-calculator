@@ -10,6 +10,7 @@ The Sushi Plate Calculator is a user-friendly mobile application designed to hel
  ## Features
 - Calculate total plates and price of the sushi consumed.
 - Custom price, color by your own in settings menu
+- Support multiple currency (change in settings).
 - Initial color picker with most common color found in Sushi restaurant.
 - Responsive, mobile-friendly web app.
 
