@@ -19,6 +19,7 @@ The Sushi Plate Calculator is a user-friendly mobile application designed to hel
 <img src="https://github.com/vectorxz/sushi-plate-calculator/blob/main/src/assets/screenshot0.png?raw=true" width="250">
 <img src="https://github.com/vectorxz/sushi-plate-calculator/blob/main/src/assets/screenshot1.png?raw=true" width="250">
 <img src="https://github.com/vectorxz/sushi-plate-calculator/blob/main/src/assets/screenshot2.png?raw=true" width="250">
+<img src="https://github.com/vectorxz/sushi-plate-calculator/blob/main/src/assets/screenshot3.png?raw=true" width="250">
 
 ## Technology used
 - Angular
