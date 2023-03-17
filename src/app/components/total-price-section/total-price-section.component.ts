@@ -14,4 +14,5 @@ export class TotalPriceSectionComponent {
   handleResetCounter(): void {
     this.onReset.emit(true);
   }
+  
 }

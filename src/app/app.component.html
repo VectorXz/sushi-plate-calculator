@@ -1,5 +1,6 @@
 <div class="flex flex-col min-h-screen h-100 justify-center items-center gap-1">
   <app-heading-section></app-heading-section>
+  <app-settings-section [priceData]="priceData" (onPriceDataChange)="handlePriceDataChange($event)"></app-settings-section>
   <app-total-price-section [totalPrice]="totalPrice" [totalPlate]="totalPlate" [currency]="currency" (onReset)="resetCounter($event)"></app-total-price-section>
-  <app-plate-button-section (onAddPlate)="handleAddPlate($event)" [currency]="currency"></app-plate-button-section>
+  <app-plate-button-section [priceData]="priceData" (onAddPlate)="handleAddPlate($event)" [currency]="currency"></app-plate-button-section>
 </div>

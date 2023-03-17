@@ -1,0 +1,14 @@
+ul.menu {
+    max-height: 250px;
+    overflow-y: scroll;
+    flex-wrap: nowrap;
+}
+
+ul.menu > li.active {
+    background-color: rgb(243 244 246);
+    font-weight: bold;
+}
+
+ul.menu > li.active > a > div.rounded-full {
+    border: 2px solid #000;
+}

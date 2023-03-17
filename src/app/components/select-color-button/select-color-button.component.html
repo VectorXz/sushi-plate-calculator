@@ -1,0 +1,10 @@
+<div class="dropdown dropdown-bottom dropdown-end">
+  <label tabindex="0" class="btn ml-1" [style.background-color]="selectedColor" #selectButton></label>
+  <ul
+    tabindex="0"
+    class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+    #ulList
+  >
+    <li *ngFor="let color of allColors" (click)="changeColor(color.hex)" [class.active]="isActive(color.hex)"><a><div class="w-5 h-5 rounded-full" [style.background-color]="color.hex"></div> {{color.color}}</a></li>
+  </ul>
+</div>
