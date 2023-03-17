@@ -35,4 +35,11 @@ export class TotalPriceSectionComponent {
     return this.plateLogData.reduce((acc, current) => acc + current.amount, 0)
   }
   
+  calculatePlateText() {
+    if(this.calculateTotalPlate() > 1) {
+      return "plates"
+    } else {
+      return "plate"
+    }
+  }
 }
