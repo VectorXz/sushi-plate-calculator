@@ -10,7 +10,21 @@
         <h3 class="text-2xl font-bold text-primary">Settings</h3>
         <span class="text-sm text-red-600 font-extrabold underline decoration-solid hover:cursor-pointer" (click)="resetSettings()">RESET SETTINGS</span>
       </div>
-      <div class="flex flex-row gap-2">
+      <div class="flex flex-row">
+        <div><span class="font-bold">Currency</span></div>
+        <div class="dropdown dropdown-bottom">
+          <label tabindex="0" class="btn btn-xs btn-secondary mx-1">{{ currency }}</label>
+          <ul
+            tabindex="0"
+            class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+            #currencyList
+          >
+          <li *ngFor="let elem of allCurrency" (click)="changeCurrency(elem)" [class.active]="elem === currency"><a>{{ elem }}</a></li>
+          </ul>
+        </div> 
+        <div>(* click to change)</div>       
+      </div>
+      <div class="flex flex-row gap-2 mt-2">
         <div class="flex flex-1 justify-center">
           <h4 class="text-lg font-bold">Price</h4>
         </div>
@@ -71,7 +85,7 @@
         </div>
       </div>
       <div class="modal-action">
-        <label for="settings-modal" class="btn" (click)="savePriceData()"
+        <label for="settings-modal" class="btn btn-primary" (click)="saveSettings()"
           >Save</label
         >
         <label for="settings-modal" class="btn" (click)="resetState()">Close</label>

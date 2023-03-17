@@ -9,9 +9,33 @@ import { PriceData } from 'src/app/app.component';
 })
 export class SettingsSectionComponent implements OnInit {
 
+  allCurrency: string[] = [
+    "THB",
+    "JPY",
+    "KRW",
+    "TWD",
+    "HKD",
+    "SGD",
+    "CNY",
+    "GBP",
+    "USD",
+  ]
+
+  private _currency: string;
+  @Input() set currency(data: string) {
+    if(data) {
+      this._currency = data;
+    }
+  }
+  get currency() {
+    return this._currency;
+  }
+  private _originalCurrency: string;
   private _priceData: PriceData[];
   private _originalPriceData: PriceData[];
   @Output() onPriceDataChange = new EventEmitter<PriceData[]>();
+  @Output() onCurrencyChange = new EventEmitter<string>();
+  @ViewChild('currencyList') currencyList: ElementRef;
 
   color: string = "#ff0000";
   public compactControl = new ColorPickerControl();
@@ -24,6 +48,7 @@ export class SettingsSectionComponent implements OnInit {
 
   ngOnInit(): void {
     this._originalPriceData = this.priceData
+    this._originalCurrency = this.currency
   }
 
   get priceData(): PriceData[] {
@@ -48,9 +73,11 @@ export class SettingsSectionComponent implements OnInit {
     this.priceData = newPriceData;
   }
 
-  savePriceData() {
-    this.priceData = this.priceData.filter(o => !!o.price && !!o.color)
-    this.onPriceDataChange.emit(this.priceData)
+  saveSettings() {
+    this.priceData = this.priceData.filter(o => !!o.price && !!o.color);
+    this.onPriceDataChange.emit(this.priceData);
+    this.onCurrencyChange.emit(this.currency);
+    this._originalCurrency = this.currency;
   }
 
   addPrice() {
@@ -65,6 +92,7 @@ export class SettingsSectionComponent implements OnInit {
 
   resetState() {
     this.priceData = this._originalPriceData;
+    this.currency = this._originalCurrency;
   }
 
   handleOnChangecolor(colorHex: string, index: number) {
@@ -90,5 +118,11 @@ export class SettingsSectionComponent implements OnInit {
         color: "#17171C"
       },
     ]
+    this.currency = "THB"
+  }
+
+  changeCurrency(currency: string) {
+    this.currencyList.nativeElement.blur();
+    this.currency = currency;
   }
 }

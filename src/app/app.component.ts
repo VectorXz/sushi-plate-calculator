@@ -55,4 +55,8 @@ export class AppComponent {
     this.priceData = newPriceData;
   }
 
+  handleOnCurrencyChange(currency: string) {
+    this.currency = currency;
+  }
+
 }
