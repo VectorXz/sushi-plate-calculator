@@ -35,7 +35,7 @@ export class TotalPriceSectionComponent {
     if(this.isIncludeVat) {
       rawSum = rawSum + (rawSum * 0.07)
     }
-    return rawSum;
+    return Math.round(rawSum * 100) / 100;
   }
 
   calculateTotalPlate() {
