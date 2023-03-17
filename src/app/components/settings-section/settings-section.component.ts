@@ -120,7 +120,7 @@ export class SettingsSectionComponent implements OnInit {
   resetSettings() {
     this.priceData = [
       {
-        price: "20",
+        price: "40",
         color: "#B71C1C"
       },
       {
