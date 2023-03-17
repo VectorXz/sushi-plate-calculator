@@ -71,4 +71,24 @@ export class SettingsSectionComponent implements OnInit {
     this.priceData[index].color = colorHex;
   }
   
+  resetSettings() {
+    this.priceData = [
+      {
+        price: "20",
+        color: "#B71C1C"
+      },
+      {
+        price: "60",
+        color: "#E5E5E5"
+      },
+      {
+        price: "80",
+        color: "#F2BA29"
+      },
+      {
+        price: "120",
+        color: "#17171C"
+      },
+    ]
+  }
 }
